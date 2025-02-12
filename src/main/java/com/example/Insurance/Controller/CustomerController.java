@@ -32,6 +32,12 @@ public class CustomerController {
         String login = customerservice.login(username, password);
         return login;
     }
+    //http://localhost:8080/CustomerAPI/v1/{username}
+    @DeleteMapping("{userid}")
+    public String deletecustomer(@PathVariable("userid") String id){
+        String deletecustomer = customerservice.deletecustomer(id);
+        return deletecustomer;
+    }
 
 
 

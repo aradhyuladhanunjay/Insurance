@@ -9,4 +9,5 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
 
     @Query("SELECT c FROM Customer c WHERE c.username = :username")
     public Customer findbyusername(@Param("username") String username);
+
 }

@@ -8,4 +8,6 @@ public interface Customerservice {
     public CustomerDTO addcustomer(Customer customer);
 
     public String login(String username, String password);
+
+    public String deletecustomer(String username);
 }

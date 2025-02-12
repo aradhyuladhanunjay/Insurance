@@ -52,6 +52,12 @@ public class CustomerserviceImp implements Customerservice{
         }
     }
 
+    @Override
+    public String deletecustomer(String id) {
+        customerRepository.deleteById(id);
+        return "customer with the given username "+id+" got deleted!";
+    }
+
     public CustomerDTO entitytoDTO(Customer customer){
         CustomerDTO customerDTO= new CustomerDTO();
         customerDTO.setId(customer.getId());

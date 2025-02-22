@@ -1,7 +1,10 @@
 package com.example.Insurance.Controller;
 
+import com.example.Insurance.Payload.JWTDTO;
 import com.example.Insurance.Service.EmailService;
 import com.example.Insurance.Service.OtpService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,11 +30,13 @@ public class OtpController {
     // Validate OTP
     //http://localhost:8080/otp/validate
     @PostMapping("/validate")
-    public String validateOtp(@RequestParam String email, @RequestParam String otp) {
-        if (otpService.validateOtp(email, otp)) {
-            return "OTP verified successfully!";
+    public ResponseEntity<?> validateOtp(@RequestParam String email, @RequestParam String otp) {
+        JWTDTO jwtdto = otpService.validateOtp(email, otp);
+
+        if (jwtdto!=null){
+            return new ResponseEntity<>(jwtdto, HttpStatus.CREATED);
         } else {
-            return "Invalid or expired OTP!";
+            return new ResponseEntity<>("Invalid or expired OTP!",HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
